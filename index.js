@@ -30,11 +30,18 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     const CraftItemsCollection = client.db('ArtisticAlchemy').collection('CraftItems');
-
+    const UserCraftCollection = client.db('ArtisticAlchemy').collection('userCraft');
 
         app.get('/data', async (req, res) => {
           const cursor = CraftItemsCollection.find();
           const result = await cursor.toArray();
+          res.send(result);
+        });
+
+        app.post('/addCraft', async (req, res) => {
+          const newCraft = req.body;
+          console.log(newCraft);
+          const result = await UserCraftCollection.insertOne(newCraft);
           res.send(result);
         });
     // Send a ping to confirm a successful connection
