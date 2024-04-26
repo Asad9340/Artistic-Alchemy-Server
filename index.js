@@ -38,6 +38,14 @@ async function run() {
           res.send(result);
         });
 
+    app.get('/myCraft/:email', async (req, res) => {
+      const email = req.params.email;
+      const query = { email:email };
+      const cursor = UserCraftCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
         app.post('/addCraft', async (req, res) => {
           const newCraft = req.body;
           console.log(newCraft);
