@@ -34,7 +34,7 @@ async function run() {
       .db('ArtisticAlchemy')
       .collection('categories');
 
-    app.get('/categories', async (req, res) => {
+    app.get('/categories/subcategory', async (req, res) => {
       const subcategory = req.params.subcategory;
       const query = { subcategory_name: subcategory };
       const cursor = subcategoryCollection.find();
