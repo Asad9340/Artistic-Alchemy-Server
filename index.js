@@ -34,9 +34,7 @@ async function run() {
       .db('ArtisticAlchemy')
       .collection('categories');
 
-    app.get('/categories/subcategory', async (req, res) => {
-      const subcategory = req.params.subcategory;
-      const query = { subcategory_name: subcategory };
+    app.get('/categories', async (req, res) => {
       const cursor = subcategoryCollection.find();
       const result = await cursor.toArray();
       res.send(result);
@@ -44,6 +42,14 @@ async function run() {
 
     app.get('/allArtCraft', async (req, res) => {
       const cursor = UserCraftCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get('/allArtCraft/:subcategory', async (req, res) => {
+      const subcategory = req.params.subcategory;
+      console.log(subcategory);
+      const query = { subcategory_name: subcategory };
+      const cursor = UserCraftCollection.find(query);
       const result = await cursor.toArray();
       res.send(result);
     });
