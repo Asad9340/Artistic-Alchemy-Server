@@ -30,6 +30,14 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     const UserCraftCollection = client.db('ArtisticAlchemy').collection('userCraft');
+    const subcategoryCollection = client.db('ArtisticAlchemy').collection('categories');
+
+    app.get('/categories', async (req, res) => {
+      const cursor = subcategoryCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
 
     app.get('/allArtCraft', async (req, res) => {
                 const cursor = UserCraftCollection.find();
