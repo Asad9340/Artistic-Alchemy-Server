@@ -53,6 +53,15 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    app.get('/allArtCraft/sort/:email/:customization', async (req, res) => {
+      const customization = req.params.customization;
+      const email = req.params.email;
+      const query = { customization: customization,email: email };
+      const cursor = UserCraftCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
 
     app.get('/details/:id', async (req, res) => {
       const id = req.params.id;
